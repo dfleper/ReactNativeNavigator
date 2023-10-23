@@ -9,6 +9,7 @@ import {
 import { services } from "../services/services";
 import moment from "moment";
 import { ScrollView } from "react-native-virtualized-view";
+import uuid from "react-native-uuid";
 
 const Tech = () => {
   const [newsData, setNewsData] = useState([]);
@@ -48,7 +49,7 @@ const Tech = () => {
                 <Divider my={2} bg="#e0e0e0" />
               </View>
             )}
-            keyExtractor={(item) => item.id + item.publishedAt.toString() + Date.now().toString()}
+            keyExtractor={(item) => item.id + uuid.v4()}
           />
         ) : (
           <View style={styles.spinner}>
