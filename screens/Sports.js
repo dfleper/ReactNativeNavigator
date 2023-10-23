@@ -1,15 +1,14 @@
 import React, { useEffect, useState } from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, FlatList } from "react-native";
 import {
   NativeBaseProvider,
-  FlatList,
-  ScrollView,
   Divider,
   Image,
   Spinner,
 } from "native-base";
 import { services } from "../services/services";
 import moment from "moment";
+import { ScrollView } from "react-native-virtualized-view";
 
 const Sports = () => {
   const [newsData, setNewsData] = useState([]);
@@ -49,7 +48,7 @@ const Sports = () => {
                 <Divider my={2} bg="#e0e0e0" />
               </View>
             )}
-            keyExtractor={(item) => item.id}
+            keyExtractor={(item) => item.id + item.publishedAt.toString() + Date.now().toString()}
           />
         ) : (
           <View style={styles.spinner}>
