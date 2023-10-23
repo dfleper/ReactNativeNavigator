@@ -2,7 +2,7 @@
 
 **React Native Expo Basic Navigation &amp; Global Status Management System.**
 - News Api [**https://newsapi.org/**](https://newsapi.org/) 📰
-  - Register and Get the API-KEY, once obtained, we will enter it in the config.js file, inside the config folder
+  - Register and Get the API-KEY, once obtained, we will enter it in the config.js file, inside the config folder.
   - Persistent Storage with **AsyncStorage.**
 
 **React Native Expo Navegación Básica y Sistema de Gestión del Estado Global.**
