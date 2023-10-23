@@ -1,5 +1,8 @@
 # ReactNativeNavigator 🚢☢
 
+![GitHub repo size](https://img.shields.io/github/repo-size/dfleper/ReactNativeNavigator?logo=github)
+![GitHub last commit](https://img.shields.io/github/last-commit/dfleper/ReactNativeNavigator?color=blue&label=last-commit&logo=github&logoColor=white)
+
 **React Native Expo Basic Navigation &amp; Global Status Management System.**
 - **News Api** [**https://newsapi.org/**](https://newsapi.org/) 📰
   - Register and Get the **API-KEY**, once obtained, we will enter it in the config.js file, inside the config folder.
