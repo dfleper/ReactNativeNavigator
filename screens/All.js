@@ -1,19 +1,23 @@
 import React, { useEffect, useState } from "react";
-import { View, Text, StyleSheet, FlatList } from "react-native";
 import {
-  NativeBaseProvider,
-  Divider,
+  View,
+  Text,
+  StyleSheet,
+  FlatList,
   Image,
-  Spinner,
-} from "native-base";
+  ActivityIndicator,
+} from "react-native";
+import { Divider } from "react-native-elements";
 import { services } from "../services/services";
 import moment from "moment";
 import { ScrollView } from "react-native-virtualized-view";
 
 const All = () => {
   const [newsData, setNewsData] = useState([]);
+
   const getItemKey = (item, index) =>
     `${item.url ?? item.title ?? item.publishedAt ?? "item"}-${index}`;
+
   useEffect(() => {
     services("general")
       .then((data) => {
@@ -23,51 +27,55 @@ const All = () => {
         alert(error);
       });
   }, []);
+
   return (
-    <NativeBaseProvider>
-      <ScrollView height={850}>
-        {newsData.length > 0 ? (
-          <FlatList
-            data={newsData}
-            renderItem={({ item }) => (
-              <View>
-                <View style={styles.newsContainer}>
-                  {item.urlToImage ? (
-                    <Image
-                      width={550}
-                      height={250}
-                      resizeMode={"cover"}
-                      source={{
-                        uri: item.urlToImage,
-                      }}
-                      alt="General Image"
-                    />
-                  ) : null}
-                  <Text style={styles.title}>{item.title}</Text>
-                  <Text style={styles.date}>
-                    {moment(item.publishedAt).format("LLL")}
-                  </Text>
-                  <Text style={styles.newsDescription}>{item.description}</Text>
-                </View>
-                <Divider my={2} bg="#e0e0e0" />
+    <ScrollView style={{ height: 850 }}>
+      {newsData.length > 0 ? (
+        <FlatList
+          data={newsData}
+          renderItem={({ item }) => (
+            <View>
+              <View style={styles.newsContainer}>
+                {item.urlToImage ? (
+                  <Image
+                    style={styles.image}
+                    resizeMode="cover"
+                    source={{ uri: item.urlToImage }}
+                  />
+                ) : null}
+
+                <Text style={styles.title}>{item.title}</Text>
+
+                <Text style={styles.date}>
+                  {moment(item.publishedAt).format("LLL")}
+                </Text>
+
+                <Text style={styles.newsDescription}>{item.description}</Text>
               </View>
-            )}
-            keyExtractor={getItemKey}
-          />
-        ) : (
-          <View style={styles.spinner}>
-            <Spinner color="danger.400" size={80} />
-          </View>
-        )}
-      </ScrollView>
-    </NativeBaseProvider>
+
+              <Divider style={styles.divider} />
+            </View>
+          )}
+          keyExtractor={getItemKey}
+        />
+      ) : (
+        <View style={styles.spinner}>
+          <ActivityIndicator size="large" />
+        </View>
+      )}
+    </ScrollView>
   );
 };
 
-//Estilos
+// Estilos
 const styles = StyleSheet.create({
   newsContainer: {
     padding: 10,
+  },
+  image: {
+    width: 550,
+    height: 250,
+    alignSelf: "center",
   },
   title: {
     fontSize: 18,
@@ -81,8 +89,12 @@ const styles = StyleSheet.create({
   date: {
     fontSize: 14,
   },
+  divider: {
+    marginVertical: 8,
+    backgroundColor: "#e0e0e0",
+    height: 1,
+  },
   spinner: {
-    display: "flex",
     justifyContent: "center",
     alignItems: "center",
     height: 400,
